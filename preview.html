@@ -7,28 +7,98 @@
     <style>
         body {
             margin: 0;
-            padding: 20px;
-            background-color: #000;
+            padding: 0;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
             font-family: 'Courier New', monospace;
             color: #00ff00;
-            overflow: hidden;
+            overflow-x: hidden;
+            min-height: 100vh;
+            background-attachment: fixed;
         }
+        
+        /* Matrix rain background effect */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.05;
+        }
+        
+        .matrix-char {
+            position: absolute;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            animation: matrix-fall linear infinite;
+        }
+        
+        @keyframes matrix-fall {
+            0% { transform: translateY(-100vh); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        
         .screen {
-            width: 640px;
-            height: 400px;
-            background-color: #000;
-            border: 2px solid #333;
-            padding: 10px;
-            font-size: 14px;
-            line-height: 16px;
-            overflow: hidden;
-            white-space: pre;
+            width: 900px;
+            height: 600px;
+            background: linear-gradient(45deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+            border: 3px solid #00ff00;
+            border-radius: 8px;
+            padding: 20px;
+            font-size: 11px;
+            line-height: 13px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            white-space: pre-wrap;
+            box-shadow: 
+                0 0 30px rgba(0, 255, 0, 0.4),
+                inset 0 0 20px rgba(0, 255, 0, 0.1);
+            position: relative;
+            margin: 20px auto;
+            font-family: 'Courier New', 'DejaVu Sans Mono', 'Lucida Console', monospace;
+        }
+        
+        /* Scanline effect */
+        .screen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                transparent 50%,
+                rgba(0, 255, 0, 0.03) 50%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        
+        /* Screen flicker */
+        .screen::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 255, 0, 0.02);
+            animation: flicker 0.15s infinite linear alternate;
+            pointer-events: none;
+        }
+        
+        @keyframes flicker {
+            0% { opacity: 1; }
+            100% { opacity: 0.95; }
         }
         .cursor {
             animation: blink 1s infinite;
             background-color: #00ff00;
             width: 8px;
-            height: 16px;
+            height: 14px;
             display: inline-block;
         }
         @keyframes blink {
@@ -37,73 +107,192 @@
         }
         .boot-screen {
             display: block;
+            color: #00ff00;
+            text-align: center;
+            padding-top: 50px;
         }
-        .main-screen {
+        .main-screen, .help-screen, .info-screen, .cybersec-screen, 
+        .netscan-screen, .vulnscan-screen, .ids-screen, .crypto-screen, 
+        .forensics-screen, .calc-screen, .games-screen, .themes-screen, 
+        .firewall-screen, .memory-screen, .interactive-shell {
             display: none;
-        }
-        .help-screen {
-            display: none;
-        }
-        .info-screen {
-            display: none;
-        }
-        .cybersec-screen {
-            display: none;
-        }
-        .netscan-screen {
-            display: none;
-        }
-        .vulnscan-screen {
-            display: none;
-        }
-        .crypto-screen {
-            display: none;
-        }
-        .forensics-screen {
-            display: none;
+            color: #00ff00;
         }
         button {
-            margin: 10px 5px;
-            padding: 10px 20px;
-            background-color: #333;
+            margin: 8px 4px;
+            padding: 12px 18px;
+            background-color: #001100;
             color: #00ff00;
-            border: 1px solid #00ff00;
+            border: 2px solid #00ff00;
             cursor: pointer;
             font-family: 'Courier New', monospace;
+            font-size: 11px;
+            font-weight: bold;
+            border-radius: 3px;
+            transition: all 0.2s ease;
         }
         button:hover {
             background-color: #00ff00;
             color: #000;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            transform: scale(1.05);
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+        .screen-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 500px;
+        }
+        h2 {
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            margin-bottom: 30px;
+        }
+        .navigation-help {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #00aa00;
+        }
+        .navigation-help kbd {
+            background-color: #003300;
+            border: 1px solid #00ff00;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        /* Enhanced Visual Effects */
+        .text-glow {
+            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00;
+        }
+        
+        .rainbow-text {
+            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow-wave 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes rainbow-wave {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        
+        .typing-effect {
+            overflow: hidden;
+            border-right: .15em solid #00ff00;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #00ff00; }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes pulse-glow {
+            from { box-shadow: 0 0 20px rgba(0, 255, 0, 0.3); }
+            to { box-shadow: 0 0 40px rgba(0, 255, 0, 0.8); }
+        }
+        
+        /* Interactive Terminal Input */
+        .terminal-input {
+            background: transparent;
+            border: none;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            outline: none;
+            width: 400px;
+        }
+        
+        .command-output {
+            margin: 10px 0;
+            color: #44ff44;
+        }
+        
+        /* Theme Variations */
+        .theme-blue {
+            color: #4da6ff !important;
+            border-color: #4da6ff !important;
+        }
+        
+        .theme-red {
+            color: #ff4444 !important;
+            border-color: #ff4444 !important;
+        }
+        
+        .theme-purple {
+            color: #cc66ff !important;
+            border-color: #cc66ff !important;
         }
     </style>
 </head>
 <body>
-    <h2 style="color: #00ff00; text-align: center;">CyberOS Visual Preview</h2>
+    <h2 style="color: #00ff00; text-align: center;">🔐 CyberOS Cybersecurity Edition v3.0 - Interactive Preview</h2>
     
     <div style="text-align: center; margin-bottom: 20px;">
-        <button onclick="showScreen('boot')">Boot Screen</button>
-        <button onclick="showScreen('main')">Main Interface</button>
-        <button onclick="showScreen('help')">Help Command</button>
-        <button onclick="showScreen('cybersec')">Cybersecurity</button>
-        <button onclick="showScreen('netscan')">Network Scan</button>
-        <button onclick="showScreen('vulnscan')">Vuln Scan</button>
-        <button onclick="showScreen('crypto')">Cryptography</button>
-        <button onclick="showScreen('forensics')">Forensics</button>
+        <button onclick="showScreen('boot')">🚀 Boot Screen</button>
+        <button onclick="showScreen('main')">💻 Main Interface</button>
+        <button onclick="showScreen('help')">❓ Help Command</button>
+        <button onclick="showScreen('cybersec')">🔐 Cybersecurity</button>
+        <button onclick="showScreen('netscan')">🌐 Network Scan</button>
+        <button onclick="showScreen('vulnscan')">🔍 Vuln Scan</button>
+        <button onclick="showScreen('ids')">🚨 IDS Monitor</button>
+        <button onclick="showScreen('crypto')">🔑 Cryptography</button>
+        <button onclick="showScreen('forensics')">🕵️ Forensics</button>
+        <button onclick="showScreen('calc')">🧮 Calculator</button>
+        <button onclick="showScreen('games')">🎮 Games</button>
+        <button onclick="showScreen('memory')">💾 Memory</button>
+        <button onclick="showScreen('graphics')">🎨 Graphics</button>
+        <button onclick="showScreen('themes')">🌈 Themes</button>
+        <button onclick="showScreen('logo')">🏛️ Logo</button>
+        <button onclick="showScreen('terminal')">⌨️ Interactive</button>
     </div>
 
-    <div style="display: flex; justify-content: center;">
-        <div class="screen">
-            <div id="boot" class="boot-screen"> ██████╗██╗   ██╗██████╗ ███████╗██████╗  ██████╗ ███████╗
+    <div class="screen-container">
+        <div class="screen pulse-glow">
+            <!-- Matrix background effect -->
+            <div class="matrix-bg" id="matrixBg"></div>
+            <div id="boot" class="boot-screen">
+ ██████╗██╗   ██╗██████╗ ███████╗██████╗  ██████╗ ███████╗
 ██╔════╝╚██╗ ██╔╝██╔══██╗██╔════╝██╔══██╗██╔═══██╗██╔════╝
 ██║      ╚████╔╝ ██████╔╝█████╗  ██████╔╝██║   ██║███████╗
 ██║       ╚██╔╝  ██╔══██╗██╔══╝  ██╔══██╗██║   ██║╚════██║
 ╚██████╗   ██║   ██████╔╝███████╗██║  ██║╚██████╔╝███████║
  ╚═════╝   ╚═╝   ╚═════╝ ╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
 
-    Advanced Operating System - Built for Cybersecurity
+    🔐 Cybersecurity Edition v3.0 - Built for Security Education
 
+Initializing system components...
+[✓] Memory Manager: 1MB heap allocated
+[✓] VGA Driver: 80x25 text mode ready  
+[✓] Keyboard Handler: PS/2 initialized
+[✓] Timer System: PIT configured
+[✓] Cybersecurity Toolkit: 12+ tools loaded
+[✓] Network Security Scanner: Ready
+[✓] Vulnerability Scanner: Initialized
+[✓] Cryptography Suite: Loaded
+[✓] Digital Forensics: Active
 
-System initialized successfully!
+System initialization complete!
 Type 'help' for available commands.
 
 cyberos> <span class="cursor"></span></div>
@@ -252,7 +441,211 @@ cyberos> <span class="cursor"></span></div>
 ║ Hash of analyzed region: 0xDEADBEEF                         ║
 ╚══════════════════════════════════════════════════════════════╝
 cyberos> <span class="cursor"></span></div>
+
+            <div id="ids" class="ids-screen" style="display: none;">cyberos> ids
+╔══════════════════════════════════════════════════════════════╗
+║              INTRUSION DETECTION SYSTEM                      ║
+╠══════════════════════════════════════════════════════════════╣
+║ Monitoring network traffic and system activities...         ║
+║                                                              ║
+║ <span style="color: #ff4444;">[CRITICAL]</span> Potential buffer overflow in service daemon      ║
+║ <span style="color: #ff6644;">[HIGH]</span> Multiple failed SSH attempts from 10.0.0.50         ║
+║ <span style="color: #ff6644;">[HIGH]</span> SQL injection attempt on web application             ║
+║ <span style="color: #ffaa00;">[MEDIUM]</span> Port scan detected from 192.168.1.200             ║
+║ <span style="color: #44ff44;">[INFO]</span> Successful login: user 'john' from 192.168.1.50     ║
+║ <span style="color: #44ff44;">[INFO]</span> File access: /etc/passwd by process 1337            ║
+║                                                              ║
+║ Threats detected in last hour: 12                           ║
+║ False positives filtered: 3                                 ║
+║ Active monitoring rules: 847                                ║
+╚══════════════════════════════════════════════════════════════╝
+cyberos> <span class="cursor"></span></div>
+
+            <div id="graphics" class="graphics-screen" style="display: none;">cyberos> graphics
+Graphics demonstration:
+
+┌────────────────────┐     ┌─────────────────────────┐
+│                    │     │                         │
+│   VGA Box Demo     │     │    Enhanced Graphics    │
+│                    │     │                         │
+└────────────────────┘     └─────────────────────────┘
+
+Progress bars:
+[###############.....] 75%
+[#########...........] 45%
+[##################..] 90%
+
+╔══════════════════════════════════════════════════════════════╗
+║                    GRAPHICS CAPABILITIES                     ║
+╠══════════════════════════════════════════════════════════════╣
+║ • VGA Text Mode Drawing Functions                           ║
+║ • Box and Rectangle Primitives                             ║
+║ • Progress Bar Visualization                               ║
+║ • Rainbow Text Effects                                     ║
+║ • Matrix Animation System                                  ║
+║ • Multi-color Theme Support                                ║
+║ • Real-time Visual Updates                                 ║
+╚══════════════════════════════════════════════════════════════╝
+
+Graphics demo complete!
+cyberos> <span class="cursor"></span></div>
+
+            <div id="themes" class="themes-screen" style="display: none;">cyberos> theme
+╔══════════════════════════════════════════════════════════════╗
+║                      THEME SELECTION                         ║
+╠══════════════════════════════════════════════════════════════╣
+║ Available Themes:                                            ║
+║                                                              ║
+║ <span style="color: #00ff00;">1. Matrix Green (Current) - Classic hacker aesthetic        </span>║
+║ <span style="color: #4da6ff;">2. Ocean Blue - Professional blue theme                     </span>║
+║ <span style="color: #ff4444;">3. Alert Red - High contrast warning theme                  </span>║
+║ <span style="color: #cc66ff;">4. Cyber Purple - Modern cyberpunk style                    </span>║
+║                                                              ║
+║ Usage: theme [green|blue|red|purple]                        ║
+╚══════════════════════════════════════════════════════════════╝
+
+cyberos> theme blue
+Theme changed to: Ocean Blue
+<span style="color: #4da6ff;">All interface elements now use blue color scheme</span>
+cyberos> <span class="cursor"></span></div>
+
+            <div id="logo" class="logo-screen" style="display: none;">cyberos> logo
+
+     ███████╗██╗   ██╗██████╗ ███████╗██████╗  ██████╗ ███████╗
+     ██╔════╝╚██╗ ██╔╝██╔══██╗██╔════╝██╔══██╗██╔═══██╗██╔════╝
+     ██║      ╚████╔╝ ██████╔╝█████╗  ██████╔╝██║   ██║███████╗
+     ██║       ╚██╔╝  ██╔══██╗██╔══╝  ██╔══██╗██║   ██║╚════██║
+     ███████╗   ██║   ██████╔╝███████╗██║  ██║╚██████╔╝███████║
+     ╚══════╝   ╚═╝   ╚═════╝ ╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+
+        🔐 Cybersecurity Edition v3.0 - Built for Security Education
+
+            ┌─────────────────────────────────────────┐
+            │  "Where Learning Meets Real Security"   │
+            │                                         │
+            │  • Advanced OS Development              │
+            │  • Professional Security Tools          │
+            │  • Interactive Learning Platform        │
+            │  • Hands-on Cybersecurity Training     │
+            └─────────────────────────────────────────┘
+
+cyberos> <span class="cursor"></span></div>
+
+            <div id="calc" class="calc-screen" style="display: none;">cyberos> calc (15 + 27) * 2
+╔══════════════════════════════════════════════════════════════╗
+║                     CYBEROS CALCULATOR                       ║
+╠══════════════════════════════════════════════════════════════╣
+║ Expression: (15 + 27) * 2                                   ║
+║ Parsing tokens...                                           ║
+║ Step 1: 15 + 27 = 42                                        ║
+║ Step 2: 42 * 2 = 84                                         ║
+║                                                              ║
+║ Result: 0x54 (84 decimal)                                   ║
+╚══════════════════════════════════════════════════════════════╝
+
+cyberos> calc help
+╔══════════════════════════════════════════════════════════════╗
+║                    CALCULATOR HELP                           ║
+╠══════════════════════════════════════════════════════════════╣
+║ Supported Operations:                                        ║
+║  +  Addition         -  Subtraction                         ║
+║  *  Multiplication   /  Division                            ║
+║  %  Modulo          ()  Parentheses                         ║
+║                                                              ║
+║ Examples:                                                    ║
+║  calc 15 + 27                                               ║
+║  calc (100 - 25) / 3                                        ║
+║  calc 255 % 16                                              ║
+╚══════════════════════════════════════════════════════════════╝
+cyberos> <span class="cursor"></span></div>
+
+            <div id="games" class="games-screen" style="display: none;">cyberos> snake
+╔══════════════════════════════════════════════════════════════╗
+║                         SNAKE GAME                           ║
+╠══════════════════════════════════════════════════════════════╣
+║                                                              ║
+║    ┌────────────────────────────────────────┐                ║
+║    │                                        │                ║
+║    │  ####                                  │                ║
+║    │                                        │                ║
+║    │                   *                    │                ║
+║    │                                        │                ║
+║    │                                        │                ║
+║    └────────────────────────────────────────┘                ║
+║                                                              ║
+║    Score: 0  |  Length: 4  |  Controls: WASD               ║
+║                                                              ║
+║    Press any key to start...                                ║
+╚══════════════════════════════════════════════════════════════╝
+
+cyberos> guess
+╔══════════════════════════════════════════════════════════════╗
+║                     NUMBER GUESSING GAME                     ║
+╠══════════════════════════════════════════════════════════════╣
+║ I've picked a number between 1 and 100                      ║
+║ Can you guess it in 7 tries?                                ║
+║                                                              ║
+║ Your guess: 50                                              ║
+║ Too high! Try a lower number.                               ║
+║                                                              ║
+║ Attempts remaining: 6                                       ║
+║ Previous guesses: 50                                        ║
+╚══════════════════════════════════════════════════════════════╝
+cyberos> <span class="cursor"></span></div>
+
+            <div id="memory" class="memory-screen" style="display: none;">cyberos> memory
+┌─────────────────────────────────────┐
+│           MEMORY STATUS             │
+├─────────────────────────────────────┤
+│ Total Memory:  0x100000 bytes       │
+│ Used Memory:   0x15420 bytes        │
+│ Free Memory:   0xEABE0 bytes        │
+│ Alloc Blocks:  0x7                  │
+└─────────────────────────────────────┘
+
+╔══════════════════════════════════════════════════════════════╗
+║                      HEAP STATISTICS                         ║
+╠══════════════════════════════════════════════════════════════╣
+║ Allocation Details:                                          ║
+║ • Block 1: 0x200000 - 0x201000 (4KB) - VGA Buffer          ║
+║ • Block 2: 0x201000 - 0x202000 (4KB) - Keyboard Buffer     ║
+║ • Block 3: 0x202000 - 0x203000 (4KB) - Timer System        ║
+║ • Block 4: 0x203000 - 0x204000 (4KB) - Cybersec Toolkit    ║
+║ • Block 5: 0x204000 - 0x205000 (4KB) - Calculator Engine   ║
+║ • Block 6: 0x205000 - 0x206000 (4KB) - Games System        ║
+║ • Block 7: 0x206000 - 0x207000 (4KB) - String Operations   ║
+║                                                              ║
+║ Fragmentation: Low (2.3%)                                   ║
+║ Peak Usage: 0x18900 bytes                                   ║
+╚══════════════════════════════════════════════════════════════╝
+cyberos> <span class="cursor"></span></div>
+
+            <div id="terminal" class="interactive-shell" style="display: none;">cyberos> <input type="text" class="terminal-input" id="commandInput" placeholder="Type a command..." onkeydown="handleCommand(event)">
+<div id="terminalOutput">Welcome to CyberOS Interactive Terminal!
+Type commands to interact with the system.
+
+Available commands: help, netscan, vulnscan, hash, encrypt, calc, memory, uptime, clear, graphics, theme, logo, matrix, rainbow
+
+</div>
+cyberos> <span class="cursor"></span></div>
         </div>
+    </div>
+
+    <div class="navigation-help">
+        <p>🎮 <strong>Interactive Controls:</strong> 
+        <kbd>←</kbd><kbd>→</kbd> Navigate | 
+        <kbd>1</kbd>-<kbd>9</kbd> Quick access | 
+        <kbd>0</kbd> Terminal | 
+        <kbd>Space</kbd> Cycle themes | 
+        <kbd>M</kbd> Matrix effect</p>
+        <p>🔥 <strong>New Features:</strong> 
+        Real-time terminal • Advanced animations • Theme switching • Matrix background • Enhanced visuals</p>
+    </div>
+
+    <div class="navigation-help">
+        <p><strong>🎮 Navigation:</strong> Use <kbd>←</kbd> <kbd>→</kbd> arrow keys to navigate screens | Use number keys <kbd>1</kbd>-<kbd>9</kbd> for quick access</p>
+        <p><strong>🔐 Features:</strong> Network Security • Vulnerability Assessment • IDS Monitoring • Cryptography • Digital Forensics • Memory Management</p>
+        <p><strong>📚 Educational Value:</strong> Perfect for cybersecurity students, IT professionals, and security researchers</p>
     </div>
 
     <div style="color: #00ff00; margin-top: 20px; text-align: center;">
@@ -291,15 +684,412 @@ cyberos> <span class="cursor"></span></div>
     </div>
 
     <script>
+        // Current theme tracking
+        let currentTheme = 'green';
+        let matrixActive = false;
+        
         function showScreen(screenName) {
             // Hide all screens
-            document.querySelectorAll('.screen > div').forEach(div => {
-                div.style.display = 'none';
+            const screens = ['boot', 'main', 'help', 'cybersec', 'netscan', 'vulnscan', 'ids', 'crypto', 'forensics', 'calc', 'games', 'memory', 'terminal', 'firewall', 'info', 'uptime', 'themes', 'logo', 'graphics'];
+            screens.forEach(screen => {
+                const element = document.getElementById(screen);
+                if (element) {
+                    element.style.display = 'none';
+                }
             });
             
             // Show selected screen
-            document.getElementById(screenName).style.display = 'block';
+            const selectedScreen = document.getElementById(screenName);
+            if (selectedScreen) {
+                selectedScreen.style.display = 'block';
+            }
+            
+            // Add special effects for certain screens
+            if (screenName === 'netscan') {
+                animateScanning();
+            } else if (screenName === 'vulnscan') {
+                animateVulnScan();
+            } else if (screenName === 'boot') {
+                animateBoot();
+            } else if (screenName === 'ids') {
+                animateIDS();
+            } else if (screenName === 'terminal') {
+                focusTerminal();
+            } else if (screenName === 'graphics') {
+                animateGraphics();
+            } else if (screenName === 'logo') {
+                animateLogo();
+            }
         }
+        
+        function animateScanning() {
+            const screen = document.getElementById('netscan');
+            if (screen) {
+                screen.style.opacity = '0.3';
+                screen.style.transition = 'opacity 0.5s ease-in';
+                setTimeout(() => {
+                    screen.style.opacity = '1';
+                }, 500);
+                
+                // Simulate progressive scanning
+                const lines = screen.innerText.split('\n');
+                let currentLine = 0;
+                const scanInterval = setInterval(() => {
+                    if (currentLine < lines.length) {
+                        // Add scanning effect
+                        currentLine++;
+                    } else {
+                        clearInterval(scanInterval);
+                    }
+                }, 200);
+            }
+        }
+        
+        function animateVulnScan() {
+            const screen = document.getElementById('vulnscan');
+            if (screen) {
+                screen.style.opacity = '0.3';
+                screen.style.transition = 'opacity 0.8s ease-in';
+                setTimeout(() => {
+                    screen.style.opacity = '1';
+                }, 800);
+            }
+        }
+        
+        function animateBoot() {
+            const screen = document.getElementById('boot');
+            if (screen) {
+                screen.style.opacity = '0';
+                screen.style.transition = 'opacity 1s ease-in';
+                setTimeout(() => {
+                    screen.style.opacity = '1';
+                }, 100);
+                
+                // Add typing effect to boot messages
+                typewriterEffect(screen, 50);
+            }
+        }
+        
+        function animateIDS() {
+            const screen = document.getElementById('ids');
+            if (screen) {
+                screen.style.opacity = '0.2';
+                screen.style.transition = 'opacity 1.2s ease-in';
+                setTimeout(() => {
+                    screen.style.opacity = '1';
+                }, 600);
+                
+                // Add alert blinking effect
+                setInterval(() => {
+                    const criticalElements = screen.querySelectorAll('[style*="color: #ff4444"]');
+                    criticalElements.forEach(el => {
+                        el.style.textShadow = el.style.textShadow ? '' : '0 0 10px #ff4444';
+                    });
+                }, 1000);
+            }
+        }
+        
+        function animateGraphics() {
+            const screen = document.getElementById('graphics');
+            if (screen) {
+                screen.style.opacity = '0';
+                screen.style.transition = 'opacity 1s ease-in';
+                setTimeout(() => {
+                    screen.style.opacity = '1';
+                }, 200);
+                
+                // Animate progress bars
+                setTimeout(() => {
+                    const progressElements = screen.querySelectorAll('span');
+                    progressElements.forEach((el, index) => {
+                        setTimeout(() => {
+                            el.style.color = '#44ff44';
+                            el.style.textShadow = '0 0 5px #44ff44';
+                        }, index * 300);
+                    });
+                }, 1000);
+            }
+        }
+        
+        function animateLogo() {
+            const screen = document.getElementById('logo');
+            if (screen) {
+                screen.style.opacity = '0';
+                screen.style.transition = 'opacity 2s ease-in';
+                setTimeout(() => {
+                    screen.style.opacity = '1';
+                }, 300);
+                
+                // Add glow effect to logo
+                setTimeout(() => {
+                    screen.style.textShadow = '0 0 10px #00ff00';
+                }, 2000);
+            }
+        }
+        
+        function typewriterEffect(element, speed) {
+            const text = element.innerText;
+            element.innerText = '';
+            let i = 0;
+            const typeInterval = setInterval(() => {
+                if (i < text.length) {
+                    element.innerText += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typeInterval);
+                }
+            }, speed);
+        }
+        
+        function focusTerminal() {
+            setTimeout(() => {
+                const input = document.getElementById('commandInput');
+                if (input) {
+                    input.focus();
+                }
+            }, 100);
+        }
+        
+        function handleCommand(event) {
+            if (event.key === 'Enter') {
+                const input = event.target;
+                const command = input.value.trim();
+                const output = document.getElementById('terminalOutput');
+                
+                // Add command to output
+                output.innerHTML += `\ncyberos> ${command}\n`;
+                
+                // Process command
+                let response = processCommand(command);
+                output.innerHTML += response + '\n';
+                
+                // Clear input
+                input.value = '';
+                
+                // Scroll to bottom
+                output.scrollTop = output.scrollHeight;
+            }
+        }
+        
+        function processCommand(cmd) {
+            const commands = {
+                'help': `Available commands: netscan, vulnscan, hash, encrypt, calc, memory, uptime, clear, theme, info, graphics, logo, matrix, rainbow
+Type any command to see its output!`,
+                'netscan': `Scanning network...
+192.168.1.1 - Router [OPEN: 22,80,443]
+192.168.1.100 - PC [OPEN: 135,139,445]
+Scan complete.`,
+                'vulnscan': `Scanning system vulnerabilities...
+Kernel protection: [PASS]
+Buffer overflow: [PASS]  
+Privilege escalation: [WARN]
+Scan complete.`,
+                'hash password123': `Hash generated: 0x193463A5`,
+                'encrypt secret key': `Encrypted: 0x1F 0x0A 0x06 0x0D 0x0A 0x1A`,
+                'calc 15+27': `Result: 0x2A (42 decimal)`,
+                'memory': `Memory: 86420 bytes used / 1048576 total`,
+                'uptime': `System uptime: 2h 28m 32s`,
+                'info': `CyberOS v3.0 - Cybersecurity Edition
+Architecture: x86 32-bit
+Features: Security toolkit, Games, Calculator, Graphics`,
+                'graphics': `Graphics demonstration activated!
+Drawing boxes, progress bars, and visual effects...
+VGA graphics capabilities fully functional.`,
+                'logo': `Displaying CyberOS ASCII logo with enhanced styling...`,
+                'matrix': `Matrix effect activated! Digital rain falling...
+01010101 アイウエオ 11001100`,
+                'rainbow': `Rainbow text effect: CYBEROS in multiple colors!`,
+                'clear': '',
+                'theme blue': 'Theme changed to Ocean Blue',
+                'theme red': 'Theme changed to Alert Red',
+                'theme green': 'Theme changed to Matrix Green',
+                'theme purple': 'Theme changed to Cyber Purple'
+            };
+            
+            if (cmd === 'clear') {
+                document.getElementById('terminalOutput').innerHTML = '';
+                return '';
+            }
+            
+            return commands[cmd] || `Command not found: ${cmd}`;
+        }
+        
+        function changeTheme(theme) {
+            const root = document.documentElement;
+            currentTheme = theme;
+            
+            switch(theme) {
+                case 'blue':
+                    root.style.setProperty('--primary-color', '#4da6ff');
+                    document.body.style.color = '#4da6ff';
+                    document.querySelectorAll('.screen').forEach(screen => {
+                        screen.style.borderColor = '#4da6ff';
+                        screen.style.color = '#4da6ff';
+                    });
+                    break;
+                case 'red':
+                    root.style.setProperty('--primary-color', '#ff4444');
+                    document.body.style.color = '#ff4444';
+                    document.querySelectorAll('.screen').forEach(screen => {
+                        screen.style.borderColor = '#ff4444';
+                        screen.style.color = '#ff4444';
+                    });
+                    break;
+                case 'purple':
+                    root.style.setProperty('--primary-color', '#cc66ff');
+                    document.body.style.color = '#cc66ff';
+                    document.querySelectorAll('.screen').forEach(screen => {
+                        screen.style.borderColor = '#cc66ff';
+                        screen.style.color = '#cc66ff';
+                    });
+                    break;
+                default: // green
+                    root.style.setProperty('--primary-color', '#00ff00');
+                    document.body.style.color = '#00ff00';
+                    document.querySelectorAll('.screen').forEach(screen => {
+                        screen.style.borderColor = '#00ff00';
+                        screen.style.color = '#00ff00';
+                    });
+            }
+        }
+        
+        function createMatrixRain() {
+            if (matrixActive) return;
+            matrixActive = true;
+            
+            const matrix = document.getElementById('matrixBg');
+            matrix.innerHTML = '';
+            
+            const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+            
+            for (let i = 0; i < 50; i++) {
+                const char = document.createElement('div');
+                char.className = 'matrix-char';
+                char.innerText = chars[Math.floor(Math.random() * chars.length)];
+                char.style.left = Math.random() * 100 + '%';
+                char.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                char.style.animationDelay = Math.random() * 2 + 's';
+                matrix.appendChild(char);
+            }
+            
+            setTimeout(() => {
+                matrix.innerHTML = '';
+                matrixActive = false;
+            }, 10000);
+        }
+        
+        // Auto-start sequence
+        document.addEventListener('DOMContentLoaded', function() {
+            // Start with boot screen
+            showScreen('boot');
+            
+            // Auto-transition sequence like real OS
+            setTimeout(() => {
+                showScreen('main');
+            }, 4000);
+            
+            // Add matrix background
+            createMatrixRain();
+        });
+        
+        // Add keyboard navigation (arrow keys)
+        document.addEventListener('keydown', function(event) {
+            const screens = ['boot', 'main', 'help', 'cybersec', 'netscan', 'vulnscan', 'ids', 'crypto', 'forensics', 'calc', 'games', 'memory', 'graphics', 'themes', 'logo', 'terminal'];
+            let currentScreen = null;
+            let currentIndex = -1;
+            
+            // Find currently visible screen
+            for (let i = 0; i < screens.length; i++) {
+                const element = document.getElementById(screens[i]);
+                if (element && element.style.display !== 'none') {
+                    currentScreen = screens[i];
+                    currentIndex = i;
+                    break;
+                }
+            }
+            
+            // Navigate with arrow keys
+            if (event.key === 'ArrowRight' && currentIndex < screens.length - 1) {
+                event.preventDefault();
+                showScreen(screens[currentIndex + 1]);
+            } else if (event.key === 'ArrowLeft' && currentIndex > 0) {
+                event.preventDefault();
+                showScreen(screens[currentIndex - 1]);
+            }
+            
+            // Quick access keys
+            switch(event.key) {
+                case '1': showScreen('boot'); break;
+                case '2': showScreen('main'); break;
+                case '3': showScreen('help'); break;
+                case '4': showScreen('cybersec'); break;
+                case '5': showScreen('netscan'); break;
+                case '6': showScreen('vulnscan'); break;
+                case '7': showScreen('ids'); break;
+                case '8': showScreen('crypto'); break;
+                case '9': showScreen('forensics'); break;
+                case '0': showScreen('terminal'); break;
+                case 'g': case 'G': showScreen('graphics'); break;
+                case 't': case 'T': showScreen('themes'); break;
+                case 'l': case 'L': showScreen('logo'); break;
+                case ' ': 
+                    event.preventDefault();
+                    const themes = ['green', 'blue', 'red', 'purple'];
+                    const nextTheme = themes[(themes.indexOf(currentTheme) + 1) % themes.length];
+                    changeTheme(nextTheme);
+                    break;
+                case 'm': case 'M':
+                    createMatrixRain();
+                    break;
+            }
+        });
+        
+        // Add button hover effects with enhanced animations
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+                this.style.transition = 'transform 0.2s ease';
+                this.style.boxShadow = `0 0 15px ${getComputedStyle(this).color}`;
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+                this.style.boxShadow = '';
+            });
+        });
+        
+        // Enhanced cursor blinking with randomization
+        setInterval(() => {
+            document.querySelectorAll('.cursor').forEach(cursor => {
+                cursor.style.visibility = cursor.style.visibility === 'hidden' ? 'visible' : 'hidden';
+            });
+        }, 500);
+        
+        // Add screen glow effect on hover
+        document.querySelectorAll('.screen').forEach(screen => {
+            screen.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 0 40px rgba(0, 255, 0, 0.6), inset 0 0 30px rgba(0, 255, 0, 0.2)';
+            });
+            
+            screen.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '0 0 30px rgba(0, 255, 0, 0.4), inset 0 0 20px rgba(0, 255, 0, 0.1)';
+            });
+        });
+        
+        // Add random glitch effects
+        setInterval(() => {
+            if (Math.random() < 0.1) { // 10% chance every interval
+                const screens = document.querySelectorAll('.screen');
+                screens.forEach(screen => {
+                    if (screen.style.display !== 'none') {
+                        screen.style.transform = 'translateX(2px)';
+                        setTimeout(() => {
+                            screen.style.transform = 'translateX(0)';
+                        }, 100);
+                    }
+                });
+            }
+        }, 2000);
     </script>
 </body>
 </html>

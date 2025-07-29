@@ -50,6 +50,111 @@ static void process_command(const char* cmd) {
         vga_print("╚═══════════════════════════════════════════════════════════════╝\n");
         vga_print("Type 'cybersec' for detailed cybersecurity command help.\n");
     }
+    else if (strcmp(cmd, "logo") == 0) {
+        vga_draw_cyber_logo();
+    }
+    else if (strcmp(cmd, "matrix") == 0) {
+        vga_set_color(VGA_COLOR_LIGHT_GREEN, VGA_COLOR_BLACK);
+        vga_print("\nMatrix effect activated...\n");
+        for (int i = 0; i < 5; i++) {
+            vga_matrix_effect();
+            delay_ms(500);
+        }
+        vga_print("Matrix effect complete.\n");
+    }
+    else if (strcmp(cmd, "rainbow") == 0) {
+        vga_print("\n");
+        vga_rainbow_text("CYBEROS RAINBOW TEXT DEMONSTRATION", 20, 10);
+        vga_print("\n\nRainbow text effect activated!\n");
+    }
+    else if (strcmp(cmd, "graphics") == 0) {
+        vga_print("\nGraphics demonstration:\n\n");
+        
+        // Draw boxes
+        vga_draw_box(5, 12, 20, 5, VGA_COLOR_CYAN);
+        vga_draw_box(30, 12, 25, 5, VGA_COLOR_LIGHT_RED);
+        
+        // Progress bars
+        vga_set_color(VGA_COLOR_LIGHT_GREEN, VGA_COLOR_BLACK);
+        vga_print("\nProgress bars:\n");
+        vga_progress_bar(5, 18, 20, 75, VGA_COLOR_GREEN, VGA_COLOR_LIGHT_GREY);
+        vga_progress_bar(5, 19, 20, 45, VGA_COLOR_LIGHT_RED, VGA_COLOR_LIGHT_GREY);
+        vga_progress_bar(5, 20, 20, 90, VGA_COLOR_CYAN, VGA_COLOR_LIGHT_GREY);
+        
+        vga_print("\n\nGraphics demo complete!\n");
+    }
+    else if (strcmp(cmd, "theme") == 0) {
+        vga_print("\n╔══════════════════════════════════════════════════════════════╗\n");
+        vga_print("║                      THEME SELECTION                         ║\n");
+        vga_print("╠══════════════════════════════════════════════════════════════╣\n");
+        vga_print("║ Available Themes:                                            ║\n");
+        vga_print("║                                                              ║\n");
+        vga_set_color(VGA_COLOR_LIGHT_GREEN, VGA_COLOR_BLACK);
+        vga_print("║ 1. Matrix Green (Current) - Classic hacker aesthetic        ║\n");
+        vga_set_color(VGA_COLOR_LIGHT_BLUE, VGA_COLOR_BLACK);
+        vga_print("║ 2. Ocean Blue - Professional blue theme                     ║\n");
+        vga_set_color(VGA_COLOR_LIGHT_RED, VGA_COLOR_BLACK);
+        vga_print("║ 3. Alert Red - High contrast warning theme                  ║\n");
+        vga_set_color(VGA_COLOR_LIGHT_MAGENTA, VGA_COLOR_BLACK);
+        vga_print("║ 4. Cyber Purple - Modern cyberpunk style                    ║\n");
+        vga_set_color(VGA_COLOR_LIGHT_GREEN, VGA_COLOR_BLACK);
+        vga_print("║                                                              ║\n");
+        vga_print("║ Usage: theme [green|blue|red|purple]                        ║\n");
+        vga_print("╚══════════════════════════════════════════════════════════════╝\n");
+    }
+    else if (strncmp(cmd, "theme ", 6) == 0) {
+        const char* theme = cmd + 6;
+        if (strcmp(theme, "green") == 0) {
+            vga_set_color(VGA_COLOR_LIGHT_GREEN, VGA_COLOR_BLACK);
+            vga_print("Theme changed to: Matrix Green\n");
+        } else if (strcmp(theme, "blue") == 0) {
+            vga_set_color(VGA_COLOR_LIGHT_BLUE, VGA_COLOR_BLACK);
+            vga_print("Theme changed to: Ocean Blue\n");
+        } else if (strcmp(theme, "red") == 0) {
+            vga_set_color(VGA_COLOR_LIGHT_RED, VGA_COLOR_BLACK);
+            vga_print("Theme changed to: Alert Red\n");
+        } else if (strcmp(theme, "purple") == 0) {
+            vga_set_color(VGA_COLOR_LIGHT_MAGENTA, VGA_COLOR_BLACK);
+            vga_print("Theme changed to: Cyber Purple\n");
+        } else {
+            vga_print("Unknown theme. Available: green, blue, red, purple\n");
+        }
+    }
+    else if (strcmp(cmd, "rainbow") == 0) {
+        vga_print("\n");
+        vga_rainbow_text("CYBEROS RAINBOW TEXT DEMONSTRATION", 20, 10);
+        vga_print("\n\nRainbow text effect activated!\n");
+    }
+    else if (strcmp(cmd, "info") == 0) {
+        vga_print("\n╔══════════════════════════════════════════════════════════════╗\n");
+        vga_print("║                    CYBEROS SYSTEM INFO                       ║\n");
+        vga_print("╠══════════════════════════════════════════════════════════════╣\n");
+        vga_print("║ System: CyberOS Cybersecurity Edition v3.0                  ║\n");
+        vga_print("║ Architecture: x86 32-bit Protected Mode                     ║\n");
+        vga_print("║ Kernel: Custom C kernel with ASM bootloader                 ║\n");
+        vga_print("║ Memory: 1MB RAM (0x100000 bytes)                            ║\n");
+        vga_print("║ Display: VGA Text Mode 80x25                                ║\n");
+        vga_print("║ Input: PS/2 Keyboard with full scancode support             ║\n");
+        vga_print("║ Timer: Programmable Interval Timer (PIT) @ 100Hz            ║\n");
+        vga_print("║ Features: Cybersecurity toolkit, Games, Calculator          ║\n");
+        vga_print("║                                                              ║\n");
+        vga_print("║ Hardware Drivers:                                            ║\n");
+        vga_print("║ • VGA Text Driver        [LOADED]                           ║\n");
+        vga_print("║ • PS/2 Keyboard Driver   [LOADED]                           ║\n");
+        vga_print("║ • PIT Timer Driver       [LOADED]                           ║\n");
+        vga_print("║ • Port I/O Abstraction   [LOADED]                           ║\n");
+        vga_print("║                                                              ║\n");
+        vga_print("║ Software Modules:                                            ║\n");
+        vga_print("║ • Memory Manager         [ACTIVE]                           ║\n");
+        vga_print("║ • Cybersecurity Suite    [ACTIVE]                           ║\n");
+        vga_print("║ • Calculator Engine      [ACTIVE]                           ║\n");
+        vga_print("║ • Games System          [ACTIVE]                           ║\n");
+        vga_print("║                                                              ║\n");
+        vga_print("║ Uptime: ");
+        print_uptime();
+        vga_print("                                    ║\n");
+        vga_print("╚══════════════════════════════════════════════════════════════╝\n");
+    }
     else if (strcmp(cmd, "cybersec") == 0) {
         vga_print("\n╔═══════════════════════════════════════════════════════════════╗\n");
         vga_print("║                    CYBERSECURITY TOOLKIT                      ║\n");

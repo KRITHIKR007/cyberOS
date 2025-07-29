@@ -11,5 +11,6 @@ void timer_handler(void);
 uint32_t get_uptime_seconds(void);
 uint32_t get_uptime_ms(void);
 void delay_ms(uint32_t ms);
+void print_uptime(void);
 
 #endif
