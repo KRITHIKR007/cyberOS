@@ -6,6 +6,7 @@
 #include "memory.h"
 #include "calculator.h"
 #include "games.h"
+#include "cybersec.h"
 
 #define KEYBOARD_DATA_PORT 0x60
 #define KEYBOARD_STATUS_PORT 0x64
@@ -32,17 +33,163 @@ static void process_command(const char* cmd) {
         vga_print("\n╔═══════════════════════════════════════════════════════════════╗\n");
         vga_print("║                        CYBEROS COMMANDS                       ║\n");
         vga_print("╠═══════════════════════════════════════════════════════════════╣\n");
-        vga_print("║ SYSTEM:                    │ UTILITIES:                       ║\n");
-        vga_print("║  help      - Show commands │  calc [expr] - Calculator        ║\n");
-        vga_print("║  clear     - Clear screen  │  uptime      - System uptime     ║\n");
-        vga_print("║  info      - System info   │  memory      - Memory status     ║\n");
-        vga_print("║  halt      - Shutdown      │  date        - Current time      ║\n");
-        vga_print("║                            │                                  ║\n");
-        vga_print("║ GAMES & FUN:               │ THEMES:                          ║\n");
-        vga_print("║  snake     - Snake game    │  theme [name] - Change colors    ║\n");
-        vga_print("║  guess     - Number game   │  matrix       - Matrix effect    ║\n");
-        vga_print("║  logo      - Show logo     │  rainbow      - Rainbow text     ║\n");
+        vga_print("║ SYSTEM:                    │ CYBERSECURITY:                   ║\n");
+        vga_print("║  help      - Show commands │  netscan     - Network scanner   ║\n");
+        vga_print("║  clear     - Clear screen  │  vulnscan    - Vulnerability scan║\n");
+        vga_print("║  info      - System info   │  firewall    - Firewall demo     ║\n");
+        vga_print("║  halt      - Shutdown      │  ids         - Intrusion detect ║\n");
+        vga_print("║  uptime    - System uptime │  forensics   - Memory analysis   ║\n");
+        vga_print("║  memory    - Memory status │  pwdcheck    - Password analyzer ║\n");
+        vga_print("║  date      - Current time  │  hash        - Hash generator    ║\n");
+        vga_print("║                            │  encrypt     - Encryption tool   ║\n");
+        vga_print("║ UTILITIES:                 │                                  ║\n");
+        vga_print("║  calc [expr] - Calculator  │ GAMES & FUN:                     ║\n");
+        vga_print("║  theme [name] - Themes     │  snake       - Snake game        ║\n");
+        vga_print("║  matrix       - Matrix FX  │  guess       - Number game       ║\n");
+        vga_print("║  rainbow      - Rainbow    │  logo        - Show logo         ║\n");
         vga_print("╚═══════════════════════════════════════════════════════════════╝\n");
+        vga_print("Type 'cybersec' for detailed cybersecurity command help.\n");
+    }
+    else if (strcmp(cmd, "cybersec") == 0) {
+        vga_print("\n╔═══════════════════════════════════════════════════════════════╗\n");
+        vga_print("║                    CYBERSECURITY TOOLKIT                      ║\n");
+        vga_print("╠═══════════════════════════════════════════════════════════════╣\n");
+        vga_print("║ NETWORK SECURITY:          │ CRYPTOGRAPHY:                    ║\n");
+        vga_print("║  netscan     - Scan network │  hash [text] [algo] - Generate  ║\n");
+        vga_print("║  firewall    - Firewall sim │  encrypt [text] [key] - Encrypt ║\n");
+        vga_print("║  ids         - Monitor IDS  │  pwdcheck [pwd] - Check strength║\n");
+        vga_print("║                             │  pwdgen - Generate secure pwd   ║\n");
+        vga_print("║ SYSTEM SECURITY:           │                                  ║\n");
+        vga_print("║  vulnscan    - Vuln scanner │ FORENSICS:                       ║\n");
+        vga_print("║  integrity   - System check │  forensics - Memory analysis    ║\n");
+        vga_print("║  access      - Access demo  │  logs      - Log analyzer       ║\n");
+        vga_print("║                             │  recover   - File recovery      ║\n");
+        vga_print("╠═══════════════════════════════════════════════════════════════╣\n");
+        vga_print("║ Examples:                                                     ║\n");
+        vga_print("║  hash \"password123\" simple                                   ║\n");
+        vga_print("║  encrypt \"secret\" \"key\"                                      ║\n");
+        vga_print("║  pwdcheck \"MyP@ssw0rd!\"                                       ║\n");
+        vga_print("╚═══════════════════════════════════════════════════════════════╝\n");
+    }
+    // Network Security Commands
+    else if (strcmp(cmd, "netscan") == 0) {
+        network_scanner();
+    }
+    else if (strcmp(cmd, "firewall") == 0) {
+        firewall_simulator();
+    }
+    else if (strcmp(cmd, "ids") == 0) {
+        ids_monitor();
+    }
+    // System Security Commands  
+    else if (strcmp(cmd, "vulnscan") == 0) {
+        vulnerability_scanner();
+    }
+    else if (strcmp(cmd, "integrity") == 0) {
+        system_integrity_check();
+    }
+    else if (strcmp(cmd, "access") == 0) {
+        access_control_demo();
+    }
+    // Forensics Commands
+    else if (strcmp(cmd, "forensics") == 0) {
+        memory_dump_analyzer();
+    }
+    else if (strcmp(cmd, "logs") == 0) {
+        log_analyzer();
+    }
+    else if (strcmp(cmd, "recover") == 0) {
+        file_recovery_simulator();
+    }
+    // Cryptography Commands
+    else if (strlen(cmd) > 5 && cmd[0] == 'h' && cmd[1] == 'a' && cmd[2] == 's' && cmd[3] == 'h' && cmd[4] == ' ') {
+        // Parse hash command: hash "text" algorithm
+        const char* args = cmd + 5;
+        char text[64] = {0};
+        char algo[16] = {0};
+        
+        // Simple parsing - extract text and algorithm
+        int i = 0, j = 0;
+        if (args[0] == '"') {
+            i = 1; // Skip opening quote
+            while (args[i] && args[i] != '"' && j < 63) {
+                text[j++] = args[i++];
+            }
+            if (args[i] == '"') i++; // Skip closing quote
+            while (args[i] == ' ') i++; // Skip spaces
+            j = 0;
+            while (args[i] && j < 15) {
+                algo[j++] = args[i++];
+            }
+        } else {
+            // No quotes, parse until space
+            while (args[i] && args[i] != ' ' && j < 63) {
+                text[j++] = args[i++];
+            }
+            while (args[i] == ' ') i++; // Skip spaces
+            j = 0;
+            while (args[i] && j < 15) {
+                algo[j++] = args[i++];
+            }
+        }
+        
+        if (strlen(text) > 0 && strlen(algo) > 0) {
+            hash_generator(text, algo);
+        } else {
+            vga_print("\nUsage: hash \"text\" algorithm\n");
+            vga_print("Algorithms: simple, crc32\n");
+            vga_print("Example: hash \"password123\" simple\n");
+        }
+    }
+    else if (strlen(cmd) > 8 && strncmp(cmd, "encrypt ", 8) == 0) {
+        // Parse encrypt command: encrypt "text" "key"
+        const char* args = cmd + 8;
+        char text[64] = {0};
+        char key[32] = {0};
+        
+        // Simple parsing for encrypted text and key
+        int i = 0, j = 0;
+        if (args[0] == '"') {
+            i = 1; // Skip opening quote
+            while (args[i] && args[i] != '"' && j < 63) {
+                text[j++] = args[i++];
+            }
+            if (args[i] == '"') i++; // Skip closing quote
+            while (args[i] == ' ') i++; // Skip spaces
+            if (args[i] == '"') i++; // Skip opening quote for key
+            j = 0;
+            while (args[i] && args[i] != '"' && j < 31) {
+                key[j++] = args[i++];
+            }
+        }
+        
+        if (strlen(text) > 0 && strlen(key) > 0) {
+            encryption_tool(text, key);
+        } else {
+            vga_print("\nUsage: encrypt \"text\" \"key\"\n");
+            vga_print("Example: encrypt \"secret\" \"mykey\"\n");
+        }
+    }
+    else if (strlen(cmd) > 9 && strncmp(cmd, "pwdcheck ", 9) == 0) {
+        const char* password = cmd + 9;
+        if (password[0] == '"') {
+            // Extract password from quotes
+            char pwd[64] = {0};
+            int i = 1, j = 0;
+            while (password[i] && password[i] != '"' && j < 63) {
+                pwd[j++] = password[i++];
+            }
+            password_analyzer(pwd);
+        } else {
+            password_analyzer(password);
+        }
+    }
+    else if (strcmp(cmd, "pwdgen") == 0) {
+        char password[17];
+        generate_secure_password(password, 17);
+        vga_print("\nGenerated secure password: ");
+        vga_print(password);
+        vga_print("\nNote: This is a demonstration. Use proper entropy sources in production.\n");
     }
     else if (strcmp(cmd, "clear") == 0) {
         vga_clear_screen();

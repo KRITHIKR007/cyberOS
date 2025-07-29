@@ -47,13 +47,19 @@
         .info-screen {
             display: none;
         }
-        .calc-screen {
+        .cybersec-screen {
             display: none;
         }
-        .games-screen {
+        .netscan-screen {
             display: none;
         }
-        .themes-screen {
+        .vulnscan-screen {
+            display: none;
+        }
+        .crypto-screen {
+            display: none;
+        }
+        .forensics-screen {
             display: none;
         }
         button {
@@ -78,10 +84,11 @@
         <button onclick="showScreen('boot')">Boot Screen</button>
         <button onclick="showScreen('main')">Main Interface</button>
         <button onclick="showScreen('help')">Help Command</button>
-        <button onclick="showScreen('info')">Info Command</button>
-        <button onclick="showScreen('calc')">Calculator</button>
-        <button onclick="showScreen('games')">Games</button>
-        <button onclick="showScreen('themes')">Themes</button>
+        <button onclick="showScreen('cybersec')">Cybersecurity</button>
+        <button onclick="showScreen('netscan')">Network Scan</button>
+        <button onclick="showScreen('vulnscan')">Vuln Scan</button>
+        <button onclick="showScreen('crypto')">Cryptography</button>
+        <button onclick="showScreen('forensics')">Forensics</button>
     </div>
 
     <div style="display: flex; justify-content: center;">
@@ -121,106 +128,165 @@ cyberos> <span class="cursor"></span></div>
 ╔═══════════════════════════════════════════════════════════════╗
 ║                        CYBEROS COMMANDS                       ║
 ╠═══════════════════════════════════════════════════════════════╣
-║ SYSTEM:                    │ UTILITIES:                       ║
-║  help      - Show commands │  calc [expr] - Calculator        ║
-║  clear     - Clear screen  │  uptime      - System uptime     ║
-║  info      - System info   │  memory      - Memory status     ║
-║  halt      - Shutdown      │  date        - Current time      ║
-║                            │                                  ║
-║ GAMES & FUN:               │ THEMES:                          ║
-║  snake     - Snake game    │  theme [name] - Change colors    ║
-║  guess     - Number game   │  matrix       - Matrix effect    ║
-║  logo      - Show logo     │  rainbow      - Rainbow text     ║
+║ SYSTEM:                    │ CYBERSECURITY:                   ║
+║  help      - Show commands │  netscan     - Network scanner   ║
+║  clear     - Clear screen  │  vulnscan    - Vulnerability scan║
+║  info      - System info   │  firewall    - Firewall demo     ║
+║  halt      - Shutdown      │  ids         - Intrusion detect ║
+║  uptime    - System uptime │  forensics   - Memory analysis   ║
+║  memory    - Memory status │  pwdcheck    - Password analyzer ║
+║  date      - Current time  │  hash        - Hash generator    ║
+║                            │  encrypt     - Encryption tool   ║
+║ UTILITIES:                 │                                  ║
+║  calc [expr] - Calculator  │ GAMES & FUN:                     ║
+║  theme [name] - Themes     │  snake       - Snake game        ║
+║  matrix       - Matrix FX  │  guess       - Number game       ║
+║  rainbow      - Rainbow    │  logo        - Show logo         ║
+╚═══════════════════════════════════════════════════════════════╝
+Type 'cybersec' for detailed cybersecurity command help.
+cyberos> <span class="cursor"></span></div>
+
+            <div id="cybersec" class="cybersec-screen" style="display: none;">cyberos> cybersec
+╔═══════════════════════════════════════════════════════════════╗
+║                    CYBERSECURITY TOOLKIT                      ║
+╠═══════════════════════════════════════════════════════════════╣
+║ NETWORK SECURITY:          │ CRYPTOGRAPHY:                    ║
+║  netscan     - Scan network │  hash [text] [algo] - Generate  ║
+║  firewall    - Firewall sim │  encrypt [text] [key] - Encrypt ║
+║  ids         - Monitor IDS  │  pwdcheck [pwd] - Check strength║
+║                             │  pwdgen - Generate secure pwd   ║
+║ SYSTEM SECURITY:           │                                  ║
+║  vulnscan    - Vuln scanner │ FORENSICS:                       ║
+║  integrity   - System check │  forensics - Memory analysis    ║
+║  access      - Access demo  │  logs      - Log analyzer       ║
+║                             │  recover   - File recovery      ║
+╠═══════════════════════════════════════════════════════════════╣
+║ Examples:                                                     ║
+║  hash "password123" simple                                   ║
+║  encrypt "secret" "key"                                      ║
+║  pwdcheck "MyP@ssw0rd!"                                       ║
 ╚═══════════════════════════════════════════════════════════════╝
 cyberos> <span class="cursor"></span></div>
 
-            <div id="info" class="info-screen">cyberos> info
+            <div id="netscan" class="netscan-screen" style="display: none;">cyberos> netscan
 ╔══════════════════════════════════════════════════════════════╗
-║                        SYSTEM INFORMATION                    ║
+║                    NETWORK SECURITY SCANNER                  ║
 ╠══════════════════════════════════════════════════════════════╣
-║ OS Name:     CyberOS Advanced v2.0                          ║
-║ Architecture: x86 (32-bit)                                  ║
-║ Built:       July 2025                                      ║
-║ Purpose:     Cybersecurity Education                        ║
-║ Display:     VGA Text Mode 80x25                            ║
-║ Features:    Memory Mgmt, Timer, Calculator, Games          ║
-║ Memory:      0x15420 / 0x100000 bytes used                  ║
-║ Uptime:      0x12C seconds                                  ║
+║ Scanning local network range: 192.168.1.0/24                ║
+║                                                              ║
+║ 192.168.1.1   - Router          [OPEN: 22,80,443]          ║
+║ 192.168.1.100 - Windows PC      [OPEN: 135,139,445]        ║
+║ 192.168.1.101 - Linux Server    [OPEN: 22,80,3306]         ║
+║ 192.168.1.102 - IoT Device      [OPEN: 80,8080]            ║
+║ 192.168.1.103 - Printer         [OPEN: 9100,515]           ║
+║                                                              ║
+║ Potential Vulnerabilities Found:                            ║
+║ <span style="color: #ff4444;">• Weak SSH configuration on 192.168.1.101</span>                   ║
+║ <span style="color: #ff4444;">• Unencrypted web interface on IoT device</span>                   ║
+║ <span style="color: #ff4444;">• Default credentials likely on printer</span>                     ║
 ╚══════════════════════════════════════════════════════════════╝
 cyberos> <span class="cursor"></span></div>
 
-            <div id="calc" class="calc-screen" style="display: none;">cyberos> calc 15 + 27 * 2
-
-Result: 0x45
-
-cyberos> calc (100 - 25) / 3
-
-Result: 0x19
-
-cyberos> calc 255 % 16
-
-Result: 0xF
-
-Calculator Help:
-Supported operations: + - * / % ()
-Examples: calc 2 + 3, calc (5 * 6) / 2
+            <div id="vulnscan" class="vulnscan-screen" style="display: none;">cyberos> vulnscan
+╔══════════════════════════════════════════════════════════════╗
+║                  SYSTEM VULNERABILITY SCANNER                ║
+╠══════════════════════════════════════════════════════════════╣
+║ Scanning CyberOS system components...                       ║
+║                                                              ║
+║ Kernel memory protection            <span style="color: #44ff44;">[PASS]</span>              ║
+║ Stack overflow prevention           <span style="color: #ffaa00;">[WARN]</span>              ║
+║ Buffer overflow detection           <span style="color: #44ff44;">[PASS]</span>              ║
+║ Privilege escalation vectors        <span style="color: #ff4444;">[FAIL]</span>              ║
+║ Interrupt handler security          <span style="color: #44ff44;">[PASS]</span>              ║
+║ Memory allocation bounds            <span style="color: #ffaa00;">[WARN]</span>              ║
+║                                                              ║
+║ Critical Issues Found: 1                                    ║
+║ Warnings: 2                                                 ║
+║ Recommendations: Implement privilege separation             ║
+╚══════════════════════════════════════════════════════════════╝
 cyberos> <span class="cursor"></span></div>
 
-            <div id="games" class="games-screen" style="display: none;">cyberos> snake
+            <div id="crypto" class="crypto-screen" style="display: none;">cyberos> hash "password123" simple
+╔══════════════════════════════════════════════════════════════╗
+║                    HASH GENERATOR                             ║
+╠══════════════════════════════════════════════════════════════╣
+║ Input: password123                                           ║
+║ Algorithm: simple                                            ║
+╠══════════════════════════════════════════════════════════════╣
+║ Simple Hash: 0x193463A5                                     ║
+╚══════════════════════════════════════════════════════════════╝
 
-=== Snake Game ===
-Use WASD keys to move the snake.
-Eat the food (*) to grow!
-Don't hit the walls or yourself!
-
-┌────────────────────────────────────────┐
-│                                        │
-│  ####                                  │
-│                                        │
-│                   *                    │
-│                                        │
-│                                        │
-│                                        │
-└────────────────────────────────────────┘
-
-Score: 0  |  Length: 4
+cyberos> pwdcheck "MyP@ssw0rd!"
+╔══════════════════════════════════════════════════════════════╗
+║                  PASSWORD STRENGTH ANALYZER                  ║
+╠══════════════════════════════════════════════════════════════╣
+║ Password Length: 0xB characters                              ║
+║ Strength Score:  0xD/15                                     ║
+║                                                              ║
+║ <span style="color: #44ff44;">Rating: STRONG - Good security</span>                              ║
+║                                                              ║
+║ Recommendations:                                             ║
+║ • Mix uppercase, lowercase, numbers, symbols                ║
+║ • Avoid dictionary words and personal info                  ║
+╚══════════════════════════════════════════════════════════════╝
 cyberos> <span class="cursor"></span></div>
 
-            <div id="themes" class="themes-screen" style="display: none;">cyberos> theme blue
-
-Theme changed to: Ocean Blue
-
-cyberos> rainbow
-
-<span style="color: #ff0000;">C</span><span style="color: #ff4400;">y</span><span style="color: #ff8800;">b</span><span style="color: #ffcc00;">e</span><span style="color: #ccff00;">r</span><span style="color: #88ff00;">O</span><span style="color: #44ff00;">S</span><span style="color: #00ff00;"> </span><span style="color: #00ff44;">R</span><span style="color: #00ff88;">a</span><span style="color: #00ffcc;">i</span><span style="color: #00ccff;">n</span><span style="color: #0088ff;">b</span><span style="color: #0044ff;">o</span><span style="color: #0000ff;">w</span><span style="color: #4400ff;"> </span><span style="color: #8800ff;">M</span><span style="color: #cc00ff;">o</span><span style="color: #ff00cc;">d</span><span style="color: #ff0088;">e</span><span style="color: #ff0044;">!</span>
-
+            <div id="forensics" class="forensics-screen" style="display: none;">cyberos> forensics
+╔══════════════════════════════════════════════════════════════╗
+║                   MEMORY FORENSICS ANALYZER                  ║
+╠══════════════════════════════════════════════════════════════╣
+║ Analyzing memory dump for forensic artifacts...             ║
+║                                                              ║
+║ Memory Layout Analysis:                                      ║
+║ • Kernel space: 0x80000000 - 0xFFFFFFFF                     ║
+║ • User space:   0x00000000 - 0x7FFFFFFF                     ║
+║ • Heap start:   0x00200000                                  ║
+║ • Stack top:    0x7FFFEFFF                                  ║
+║                                                              ║
+║ Artifacts Found:                                             ║
+║ • Deleted file fragments in unallocated space              ║
+║ • Network connection traces                                 ║
+║ • Encryption keys in process memory                        ║
+║ • Malware injection signatures                             ║
+║                                                              ║
+║ Hash of analyzed region: 0xDEADBEEF                         ║
+╚══════════════════════════════════════════════════════════════╝
 cyberos> <span class="cursor"></span></div>
         </div>
     </div>
 
     <div style="color: #00ff00; margin-top: 20px; text-align: center;">
-        <h3>🚀 NEW FEATURES IN CYBEROS v2.0:</h3>
+        <h3>� CYBEROS CYBERSECURITY EDITION v3.0</h3>
         <ul style="text-align: left; display: inline-block;">
-            <li>🧮 <strong>Advanced Calculator</strong> - Math expressions with parentheses</li>
-            <li>🎮 <strong>Built-in Games</strong> - Snake, number guessing, and more</li>
-            <li>🎨 <strong>Color Themes</strong> - Multiple color schemes and rainbow mode</li>
-            <li>💾 <strong>Memory Management</strong> - Dynamic allocation and memory stats</li>
-            <li>⏰ <strong>Timer System</strong> - Uptime tracking and delay functions</li>
-            <li>🎭 <strong>ASCII Art</strong> - Logo display and matrix effects</li>
-            <li>📊 <strong>System Monitor</strong> - Real-time memory and performance data</li>
-            <li>🔧 <strong>Enhanced Shell</strong> - Better help system and error handling</li>
-            <li>🌈 <strong>Visual Effects</strong> - Animated displays and color cycling</li>
-            <li>🏗️ <strong>Modular Design</strong> - Easy to extend with new features</li>
+            <li>🛡️ <strong>Network Security Scanner</strong> - Identify open ports and vulnerabilities</li>
+            <li>🔍 <strong>Vulnerability Assessment</strong> - System security audit and recommendations</li>
+            <li>🔥 <strong>Firewall Simulator</strong> - Rule-based packet filtering demonstration</li>
+            <li>� <strong>Intrusion Detection System</strong> - Real-time threat monitoring</li>
+            <li>🕵️ <strong>Digital Forensics Tools</strong> - Memory analysis and file recovery</li>
+            <li>🔐 <strong>Cryptography Suite</strong> - Hash generation and encryption tools</li>
+            <li>� <strong>Password Security</strong> - Strength analysis and secure generation</li>
+            <li>� <strong>Log Analysis</strong> - Security event correlation and threat detection</li>
+            <li>🛡️ <strong>Access Control Demo</strong> - Role-based permissions and RBAC</li>
+            <li>🔒 <strong>System Integrity</strong> - File verification and tamper detection</li>
         </ul>
         
-        <h3>🛠️ TECHNICAL IMPROVEMENTS:</h3>
+        <h3>🎯 CYBERSECURITY LEARNING FEATURES:</h3>
         <ul style="text-align: left; display: inline-block;">
-            <li>Heap-based memory allocator (kmalloc/kfree)</li>
-            <li>Programmable Interval Timer (PIT) integration</li>
-            <li>Recursive descent expression parser</li>
-            <li>Enhanced VGA driver with advanced graphics</li>
-            <li>Modular kernel architecture</li>
-            <li>Professional command-line interface</li>
+            <li><strong>Hands-on Security Tools</strong> - Interactive demonstrations</li>
+            <li><strong>Real-world Scenarios</strong> - Practical cybersecurity exercises</li>
+            <li><strong>Educational Framework</strong> - Learn by doing approach</li>
+            <li><strong>Professional Interface</strong> - Industry-standard tool appearance</li>
+            <li><strong>Safe Environment</strong> - Risk-free learning sandbox</li>
+            <li><strong>Comprehensive Coverage</strong> - Network, system, and application security</li>
+        </ul>
+        
+        <h3>🚀 PERFECT FOR:</h3>
+        <ul style="text-align: left; display: inline-block;">
+            <li><strong>Cybersecurity Students</strong> - Practical tool experience</li>
+            <li><strong>IT Professionals</strong> - Security concept reinforcement</li>
+            <li><strong>Penetration Testers</strong> - Understanding target systems</li>
+            <li><strong>System Administrators</strong> - Security audit techniques</li>
+            <li><strong>Security Researchers</strong> - Low-level system analysis</li>
         </ul>
     </div>
 

@@ -1,12 +1,158 @@
-# 🚀 CyberOS Advanced v2.0 - Complete Feature Showcase
+# � CyberOS Cybersecurity Edition v3.0 - Complete Feature Showcase
 
 ## 🎯 **What Makes CyberOS Special**
 
-CyberOS has evolved from a simple educational OS into a feature-rich, interactive operating system that demonstrates advanced OS concepts while remaining accessible for learning.
+CyberOS has evolved into a **comprehensive cybersecurity education platform** - a feature-rich, interactive operating system that demonstrates both advanced OS concepts and real-world cybersecurity tools, making it perfect for cybersecurity students and professionals.
 
-## 🔥 **Major New Features**
+## 🔥 **Major Cybersecurity Features**
 
-### 1. 🧮 **Advanced Calculator Engine**
+### 1. 🛡️ **Network Security Scanner**
+```
+╔══════════════════════════════════════════════════════════════╗
+║                    NETWORK SECURITY SCANNER                  ║
+╠══════════════════════════════════════════════════════════════╣
+║ Scanning local network range: 192.168.1.0/24                ║
+║                                                              ║
+║ 192.168.1.1   - Router          [OPEN: 22,80,443]          ║
+║ 192.168.1.100 - Windows PC      [OPEN: 135,139,445]        ║
+║ 192.168.1.101 - Linux Server    [OPEN: 22,80,3306]         ║
+║ 192.168.1.102 - IoT Device      [OPEN: 80,8080]            ║
+║ 192.168.1.103 - Printer         [OPEN: 9100,515]           ║
+║                                                              ║
+║ Potential Vulnerabilities Found:                            ║
+║ • Weak SSH configuration on 192.168.1.101                   ║
+║ • Unencrypted web interface on IoT device                   ║
+║ • Default credentials likely on printer                     ║
+╚══════════════════════════════════════════════════════════════╝
+```
+- **Port scanning** simulation with realistic results
+- **Vulnerability identification** and risk assessment
+- **Network mapping** and service detection
+- **Security recommendations** for discovered issues
+
+### 2. 🔍 **System Vulnerability Scanner**
+```
+╔══════════════════════════════════════════════════════════════╗
+║                  SYSTEM VULNERABILITY SCANNER                ║
+╠══════════════════════════════════════════════════════════════╣
+║ Kernel memory protection            [PASS]              ║
+║ Stack overflow prevention           [WARN]              ║
+║ Buffer overflow detection           [PASS]              ║
+║ Privilege escalation vectors        [FAIL]              ║
+║ Interrupt handler security          [PASS]              ║
+║ Memory allocation bounds            [WARN]              ║
+╚══════════════════════════════════════════════════════════════╝
+```
+- **System security assessment** with real vulnerability checks
+- **Color-coded results** (Pass/Warn/Fail) for immediate understanding
+- **Detailed recommendations** for security improvements
+- **Real-time scanning** with animated progress display
+
+### 3. 🔥 **Firewall Simulator**
+```
+╔══════════════════════════════════════════════════════════════╗
+║                     FIREWALL SIMULATOR                       ║
+╠══════════════════════════════════════════════════════════════╣
+║ Current Rules:                                               ║
+║ 1. ALLOW  SSH (22)     from 192.168.1.0/24                  ║
+║ 2. ALLOW  HTTP (80)    from ANY                             ║
+║ 3. ALLOW  HTTPS (443)  from ANY                             ║
+║ 4. BLOCK  Telnet (23)  from ANY                             ║
+║ 5. BLOCK  FTP (21)     from ANY                             ║
+║                                                              ║
+║ 192.168.1.50:2234 -> :22    [ALLOWED]                       ║
+║ 10.0.0.1:5555 -> :23        [BLOCKED]                       ║
+║ 203.0.113.1:1234 -> :80     [ALLOWED]                       ║
+╚══════════════════════════════════════════════════════════════╝
+```
+- **Rule-based packet filtering** demonstration
+- **Real-time connection monitoring** and decision making
+- **Security policy enforcement** visualization
+- **Traffic analysis** with color-coded allow/deny decisions
+
+### 4. 🚨 **Intrusion Detection System**
+```
+╔══════════════════════════════════════════════════════════════╗
+║              INTRUSION DETECTION SYSTEM                      ║
+╠══════════════════════════════════════════════════════════════╣
+║ [CRITICAL] Potential buffer overflow in service daemon      ║
+║ [HIGH] Multiple failed SSH attempts from 10.0.0.50         ║
+║ [HIGH] SQL injection attempt on web application             ║
+║ [MEDIUM] Port scan detected from 192.168.1.200             ║
+║ [INFO] Successful login: user 'john' from 192.168.1.50     ║
+╚══════════════════════════════════════════════════════════════╝
+```
+- **Real-time threat detection** with severity classification
+- **Attack pattern recognition** (port scans, injection attempts)
+- **Behavioral analysis** and anomaly detection
+- **Threat intelligence** correlation and alerts
+
+### 5. 🔐 **Advanced Cryptography Suite**
+```
+cyberos> hash "password123" simple
+╔══════════════════════════════════════════════════════════════╗
+║                    HASH GENERATOR                             ║
+╠══════════════════════════════════════════════════════════════╣
+║ Simple Hash: 0x193463A5                                     ║
+╚══════════════════════════════════════════════════════════════╝
+
+cyberos> encrypt "secret" "key"
+╔══════════════════════════════════════════════════════════════╗
+║                    ENCRYPTION TOOL (XOR)                     ║
+╠══════════════════════════════════════════════════════════════╣
+║ Encrypted: 0x1F 0x0A 0x06 0x0D 0x0A 0x1A                   ║
+╚══════════════════════════════════════════════════════════════╝
+```
+- **Hash function implementations** (Simple hash, CRC32)
+- **Encryption/Decryption tools** with XOR cipher demonstration
+- **Password strength analysis** with detailed scoring
+- **Secure password generation** with entropy considerations
+
+### 6. 🕵️ **Digital Forensics Tools**
+```
+╔══════════════════════════════════════════════════════════════╗
+║                   MEMORY FORENSICS ANALYZER                  ║
+╠══════════════════════════════════════════════════════════════╣
+║ Memory Layout Analysis:                                      ║
+║ • Kernel space: 0x80000000 - 0xFFFFFFFF                     ║
+║ • User space:   0x00000000 - 0x7FFFFFFF                     ║
+║ • Heap start:   0x00200000                                  ║
+║                                                              ║
+║ Artifacts Found:                                             ║
+║ • Deleted file fragments in unallocated space              ║
+║ • Network connection traces                                 ║
+║ • Encryption keys in process memory                        ║
+║ • Malware injection signatures                             ║
+╚══════════════════════════════════════════════════════════════╝
+```
+- **Memory dump analysis** with artifact discovery
+- **File recovery simulation** from unallocated space
+- **Log analysis** with threat correlation
+- **Digital evidence preservation** techniques
+
+### 7. � **Password Security Analysis**
+```
+╔══════════════════════════════════════════════════════════════╗
+║                  PASSWORD STRENGTH ANALYZER                  ║
+╠══════════════════════════════════════════════════════════════╣
+║ Password Length: 0xB characters                              ║
+║ Strength Score:  0xD/15                                     ║
+║                                                              ║
+║ Rating: STRONG - Good security                              ║
+║                                                              ║
+║ Recommendations:                                             ║
+║ • Mix uppercase, lowercase, numbers, symbols                ║
+║ • Avoid dictionary words and personal info                  ║
+╚══════════════════════════════════════════════════════════════╝
+```
+- **Comprehensive password analysis** with scoring algorithm
+- **Security recommendations** based on best practices
+- **Secure password generation** with customizable parameters
+- **Educational guidance** on password security principles
+
+## 🎮 **Advanced Entertainment & Learning**
+
+### 1. 🧮 **Sophisticated Calculator Engine**
 ```
 cyberos> calc 15 + 27 * 2
 Result: 0x45
@@ -22,7 +168,7 @@ Result: 0xF
 - **Parentheses support** for complex calculations
 - **Error handling** for division by zero
 
-### 2. 🎮 **Interactive Games System**
+### 2. 🎮 **Interactive Gaming System**
 
 #### Snake Game
 ```
@@ -44,7 +190,7 @@ Score: 0  |  Length: 4
 ### 3. 🎨 **Dynamic Visual System**
 
 #### Color Themes
-- **Matrix Green** - Classic hacker aesthetic
+- **Matrix Green** - Classic cybersecurity aesthetic
 - **Ocean Blue** - Professional blue theme  
 - **Alert Red** - High-contrast warning theme
 
@@ -53,7 +199,9 @@ Score: 0  |  Length: 4
 - **Matrix Effect** - Animated digital rain
 - **ASCII Art** - Professional logo display
 
-### 4. 💾 **Professional Memory Management**
+## 💻 **Core Operating System Excellence**
+
+### 1. � **Professional Memory Management**
 
 ```
 ┌─────────────────────────────────────┐
@@ -68,55 +216,99 @@ Score: 0  |  Length: 4
 
 - **Dynamic allocation** with kmalloc/kfree
 - **Block merging** to prevent fragmentation
-- **Real-time statistics** monitoring
-- **Memory leak detection** capabilities
+- **Memory leak detection** with statistics
+- **Heap visualization** and debugging tools
 
-### 5. ⏰ **Advanced Timing System**
-
-```
-cyberos> uptime
-System Uptime: 0x2h 0x1Cm 0x2As
-```
-
-- **Programmable Interval Timer** (PIT) integration
-- **Millisecond precision** timing
-- **Uptime tracking** since boot
-- **Delay functions** for animations
-
-### 6. 🔧 **Professional Shell Interface**
+### 2. ⌨️ **Advanced Command Interface**
 
 ```
-╔═══════════════════════════════════════════════════════════════╗
-║                        CYBEROS COMMANDS                       ║
-╠═══════════════════════════════════════════════════════════════╣
-║ SYSTEM:                    │ UTILITIES:                       ║
-║  help      - Show commands │  calc [expr] - Calculator        ║
-║  clear     - Clear screen  │  uptime      - System uptime     ║
-║  info      - System info   │  memory      - Memory status     ║
-║  halt      - Shutdown      │  date        - Current time      ║
-╚═══════════════════════════════════════════════════════════════╝
+cyberos> help
+Available commands:
+  cybersec   - Access cybersecurity toolkit
+  netscan    - Network security scanner  
+  vulnscan   - System vulnerability check
+  firewall   - Firewall configuration
+  ids        - Intrusion detection system
+  forensics  - Digital forensics tools
+  hash       - Generate cryptographic hashes
+  encrypt    - Encryption/decryption tools
+  pwdcheck   - Password strength analyzer
+  calc       - Advanced calculator
+  games      - Interactive games
+  theme      - Change color themes
+  clear      - Clear screen
+  help       - Show this help
+  version    - System information
+  memory     - Memory status
+  uptime     - System uptime
 ```
 
-- **ASCII art interfaces** with professional styling
-- **Categorized commands** for better organization
-- **Enhanced error handling** with helpful suggestions
-- **Color-coded feedback** for different message types
+### 3. ⚡ **Hardware Abstraction Layer**
 
-## 🏗️ **Technical Architecture**
+- **VGA Text Mode Driver** - 80x25 color display
+- **PS/2 Keyboard Handler** - Full scancode support  
+- **Timer System** - PIT-based timing and uptime
+- **Port I/O Abstraction** - Safe hardware access
+- **Interrupt Management** - Professional IRQ handling
 
-### Modular Kernel Design
+### 4. 🏗️ **Operating System Architecture**
+
+- **32-bit Protected Mode** operation
+- **Custom bootloader** with GDT setup
+- **Modular kernel design** with clean separation
+- **Freestanding environment** - No external dependencies
+- **Cross-platform build system** with Windows/Linux support
+
+## 🚀 **How to Experience CyberOS**
+
+### Build and Run (Recommended)
+```powershell
+make clean && make all && make run
 ```
-CyberOS/
-├── Boot Layer       - Protected mode transition
-├── Kernel Core      - Main system initialization  
-├── Memory Manager   - Heap allocation system
-├── Timer System     - PIT and timing services
-├── VGA Driver       - Advanced graphics output
-├── Input Handler    - PS/2 keyboard processing
-├── Calculator       - Expression parsing engine
-├── Games Engine     - Interactive entertainment
-└── Shell Interface  - Command processing system
-```
+
+### Browser Preview (Quick Demo)
+Open `preview.html` in your browser to see:
+- **Interactive Command Demonstrations**
+- **Cybersecurity Tool Showcases**  
+- **Visual Interface Examples**
+- **Feature Explanations**
+
+## 🎓 **Educational Value**
+
+CyberOS serves as a comprehensive learning platform for:
+
+### **Cybersecurity Students**
+- **Hands-on security tool experience** without complex setup
+- **Understanding of attack vectors** and defensive measures
+- **Practical cryptography** and forensics applications
+- **Network security concepts** with visual demonstrations
+
+### **Operating Systems Students**  
+- **Real OS development** from bootloader to applications
+- **Memory management** implementation and optimization
+- **Hardware abstraction** and driver development
+- **System programming** in freestanding C environment
+
+### **Programming Enthusiasts**
+- **Low-level programming** techniques and best practices
+- **Cross-platform development** with professional build systems
+- **Algorithm implementation** (parsers, games, crypto)
+- **Professional code organization** and documentation
+
+## 🏆 **Technical Achievements**
+
+- ✅ **Complete x86 OS** from scratch with custom bootloader
+- ✅ **Professional cybersecurity toolkit** with 12+ tools
+- ✅ **Advanced memory management** with heap allocator
+- ✅ **Sophisticated parsing engine** for mathematical expressions
+- ✅ **Interactive gaming system** with multiple games
+- ✅ **Hardware driver development** for VGA and PS/2
+- ✅ **Cross-platform build system** with automated testing
+- ✅ **Comprehensive documentation** and educational materials
+
+---
+
+**CyberOS Cybersecurity Edition v3.0** - Where operating systems meet cybersecurity education! 🔐🚀
 
 ### Advanced Components
 
