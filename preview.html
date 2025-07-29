@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberOS Preview</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #000;
+            font-family: 'Courier New', monospace;
+            color: #00ff00;
+            overflow: hidden;
+        }
+        .screen {
+            width: 640px;
+            height: 400px;
+            background-color: #000;
+            border: 2px solid #333;
+            padding: 10px;
+            font-size: 14px;
+            line-height: 16px;
+            overflow: hidden;
+            white-space: pre;
+        }
+        .cursor {
+            animation: blink 1s infinite;
+            background-color: #00ff00;
+            width: 8px;
+            height: 16px;
+            display: inline-block;
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        .boot-screen {
+            display: block;
+        }
+        .main-screen {
+            display: none;
+        }
+        .help-screen {
+            display: none;
+        }
+        .info-screen {
+            display: none;
+        }
+        .calc-screen {
+            display: none;
+        }
+        .games-screen {
+            display: none;
+        }
+        .themes-screen {
+            display: none;
+        }
+        button {
+            margin: 10px 5px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+        }
+        button:hover {
+            background-color: #00ff00;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="color: #00ff00; text-align: center;">CyberOS Visual Preview</h2>
+    
+    <div style="text-align: center; margin-bottom: 20px;">
+        <button onclick="showScreen('boot')">Boot Screen</button>
+        <button onclick="showScreen('main')">Main Interface</button>
+        <button onclick="showScreen('help')">Help Command</button>
+        <button onclick="showScreen('info')">Info Command</button>
+        <button onclick="showScreen('calc')">Calculator</button>
+        <button onclick="showScreen('games')">Games</button>
+        <button onclick="showScreen('themes')">Themes</button>
+    </div>
+
+    <div style="display: flex; justify-content: center;">
+        <div class="screen">
+            <div id="boot" class="boot-screen"> ██████╗██╗   ██╗██████╗ ███████╗██████╗  ██████╗ ███████╗
+██╔════╝╚██╗ ██╔╝██╔══██╗██╔════╝██╔══██╗██╔═══██╗██╔════╝
+██║      ╚████╔╝ ██████╔╝█████╗  ██████╔╝██║   ██║███████╗
+██║       ╚██╔╝  ██╔══██╗██╔══╝  ██╔══██╗██║   ██║╚════██║
+╚██████╗   ██║   ██████╔╝███████╗██║  ██║╚██████╔╝███████║
+ ╚═════╝   ╚═╝   ╚═════╝ ╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+
+    Advanced Operating System - Built for Cybersecurity
+
+
+System initialized successfully!
+Type 'help' for available commands.
+
+cyberos> <span class="cursor"></span></div>
+
+            <div id="main" class="main-screen">╔═══════════════════════════════════════════════════════════════╗
+║                        CYBEROS COMMANDS                       ║
+╠═══════════════════════════════════════════════════════════════╣
+║ SYSTEM:                    │ UTILITIES:                       ║
+║  help      - Show commands │  calc [expr] - Calculator        ║
+║  clear     - Clear screen  │  uptime      - System uptime     ║
+║  info      - System info   │  memory      - Memory status     ║
+║  halt      - Shutdown      │  date        - Current time      ║
+║                            │                                  ║
+║ GAMES & FUN:               │ THEMES:                          ║
+║  snake     - Snake game    │  theme [name] - Change colors    ║
+║  guess     - Number game   │  matrix       - Matrix effect    ║
+║  logo      - Show logo     │  rainbow      - Rainbow text     ║
+╚═══════════════════════════════════════════════════════════════╝
+cyberos> <span class="cursor"></span></div>
+
+            <div id="help" class="help-screen">cyberos> help
+╔═══════════════════════════════════════════════════════════════╗
+║                        CYBEROS COMMANDS                       ║
+╠═══════════════════════════════════════════════════════════════╣
+║ SYSTEM:                    │ UTILITIES:                       ║
+║  help      - Show commands │  calc [expr] - Calculator        ║
+║  clear     - Clear screen  │  uptime      - System uptime     ║
+║  info      - System info   │  memory      - Memory status     ║
+║  halt      - Shutdown      │  date        - Current time      ║
+║                            │                                  ║
+║ GAMES & FUN:               │ THEMES:                          ║
+║  snake     - Snake game    │  theme [name] - Change colors    ║
+║  guess     - Number game   │  matrix       - Matrix effect    ║
+║  logo      - Show logo     │  rainbow      - Rainbow text     ║
+╚═══════════════════════════════════════════════════════════════╝
+cyberos> <span class="cursor"></span></div>
+
+            <div id="info" class="info-screen">cyberos> info
+╔══════════════════════════════════════════════════════════════╗
+║                        SYSTEM INFORMATION                    ║
+╠══════════════════════════════════════════════════════════════╣
+║ OS Name:     CyberOS Advanced v2.0                          ║
+║ Architecture: x86 (32-bit)                                  ║
+║ Built:       July 2025                                      ║
+║ Purpose:     Cybersecurity Education                        ║
+║ Display:     VGA Text Mode 80x25                            ║
+║ Features:    Memory Mgmt, Timer, Calculator, Games          ║
+║ Memory:      0x15420 / 0x100000 bytes used                  ║
+║ Uptime:      0x12C seconds                                  ║
+╚══════════════════════════════════════════════════════════════╝
+cyberos> <span class="cursor"></span></div>
+
+            <div id="calc" class="calc-screen" style="display: none;">cyberos> calc 15 + 27 * 2
+
+Result: 0x45
+
+cyberos> calc (100 - 25) / 3
+
+Result: 0x19
+
+cyberos> calc 255 % 16
+
+Result: 0xF
+
+Calculator Help:
+Supported operations: + - * / % ()
+Examples: calc 2 + 3, calc (5 * 6) / 2
+cyberos> <span class="cursor"></span></div>
+
+            <div id="games" class="games-screen" style="display: none;">cyberos> snake
+
+=== Snake Game ===
+Use WASD keys to move the snake.
+Eat the food (*) to grow!
+Don't hit the walls or yourself!
+
+┌────────────────────────────────────────┐
+│                                        │
+│  ####                                  │
+│                                        │
+│                   *                    │
+│                                        │
+│                                        │
+│                                        │
+└────────────────────────────────────────┘
+
+Score: 0  |  Length: 4
+cyberos> <span class="cursor"></span></div>
+
+            <div id="themes" class="themes-screen" style="display: none;">cyberos> theme blue
+
+Theme changed to: Ocean Blue
+
+cyberos> rainbow
+
+<span style="color: #ff0000;">C</span><span style="color: #ff4400;">y</span><span style="color: #ff8800;">b</span><span style="color: #ffcc00;">e</span><span style="color: #ccff00;">r</span><span style="color: #88ff00;">O</span><span style="color: #44ff00;">S</span><span style="color: #00ff00;"> </span><span style="color: #00ff44;">R</span><span style="color: #00ff88;">a</span><span style="color: #00ffcc;">i</span><span style="color: #00ccff;">n</span><span style="color: #0088ff;">b</span><span style="color: #0044ff;">o</span><span style="color: #0000ff;">w</span><span style="color: #4400ff;"> </span><span style="color: #8800ff;">M</span><span style="color: #cc00ff;">o</span><span style="color: #ff00cc;">d</span><span style="color: #ff0088;">e</span><span style="color: #ff0044;">!</span>
+
+cyberos> <span class="cursor"></span></div>
+        </div>
+    </div>
+
+    <div style="color: #00ff00; margin-top: 20px; text-align: center;">
+        <h3>🚀 NEW FEATURES IN CYBEROS v2.0:</h3>
+        <ul style="text-align: left; display: inline-block;">
+            <li>🧮 <strong>Advanced Calculator</strong> - Math expressions with parentheses</li>
+            <li>🎮 <strong>Built-in Games</strong> - Snake, number guessing, and more</li>
+            <li>🎨 <strong>Color Themes</strong> - Multiple color schemes and rainbow mode</li>
+            <li>💾 <strong>Memory Management</strong> - Dynamic allocation and memory stats</li>
+            <li>⏰ <strong>Timer System</strong> - Uptime tracking and delay functions</li>
+            <li>🎭 <strong>ASCII Art</strong> - Logo display and matrix effects</li>
+            <li>📊 <strong>System Monitor</strong> - Real-time memory and performance data</li>
+            <li>🔧 <strong>Enhanced Shell</strong> - Better help system and error handling</li>
+            <li>🌈 <strong>Visual Effects</strong> - Animated displays and color cycling</li>
+            <li>🏗️ <strong>Modular Design</strong> - Easy to extend with new features</li>
+        </ul>
+        
+        <h3>🛠️ TECHNICAL IMPROVEMENTS:</h3>
+        <ul style="text-align: left; display: inline-block;">
+            <li>Heap-based memory allocator (kmalloc/kfree)</li>
+            <li>Programmable Interval Timer (PIT) integration</li>
+            <li>Recursive descent expression parser</li>
+            <li>Enhanced VGA driver with advanced graphics</li>
+            <li>Modular kernel architecture</li>
+            <li>Professional command-line interface</li>
+        </ul>
+    </div>
+
+    <script>
+        function showScreen(screenName) {
+            // Hide all screens
+            document.querySelectorAll('.screen > div').forEach(div => {
+                div.style.display = 'none';
+            });
+            
+            // Show selected screen
+            document.getElementById(screenName).style.display = 'block';
+        }
+    </script>
+</body>
+</html>
